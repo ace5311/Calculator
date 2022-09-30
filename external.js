@@ -1,5 +1,6 @@
 let chooseEqual = false;
 let chooseSign = false;
+let decimalUse = false;
 let num1 = '';
 let num2 = '';
 let operator = '';
@@ -21,6 +22,8 @@ buttons.forEach(button => {button.addEventListener('click',()=>{
             num1=answer;
             num2='';
             chooseEqual=false;
+            decimalUse=false;
+            chooseSign=false;
         }
     }
     else if((userChoice === 'add' ||userChoice === 'subtract' || userChoice === 'multiply' || userChoice === 'divide')){
@@ -31,27 +34,50 @@ buttons.forEach(button => {button.addEventListener('click',()=>{
             num2='';
         }
         operator = userChoice;
+        decimalUse = false;
     }
     else if(!chooseEqual && !chooseSign){
-        num1 = num1.concat(userChoice);
-        display.textContent= `${num1}`;
+        if(decimalUse && userChoice===".") decimalUse=true;
+        else{
+            if(userChoice==="backspace") {
+                let editedNum1 = num1.slice(0,-1);
+                num1 = editedNum1;
+                display.textContent= `${num1}`;
+            }
+            else{
+                num1 = num1.concat(userChoice);
+                display.textContent= `${num1}`;
+                if(userChoice===".") decimalUse=true;
+            }
+        } 
     }
     else if(!chooseEqual && chooseSign) {
-        num2 = num2.concat(userChoice);
-        display.textContent= `${num2}`;
+        if(decimalUse && userChoice===".") decimalUse=true;
+        else {
+            if(userChoice==="backspace") {
+                let editedNum1 = num1.slice(0,-1);
+                num1 = editedNum1;
+                display.textContent= `${num1}`;
+            }
+            else {
+                num2 = num2.concat(userChoice);
+                display.textContent= `${num2}`;
+                if(userChoice===".") decimalUse=true;
+            }
+        }
     }
 })
 });
 
 function operate(operator, num1, num2){
-    let a = parseInt(num1);
-    let b = parseInt(num2);
+    let a = parseFloat(num1);
+    let b = parseFloat(num2);
     if(operator==="add") answer = a+b;
     if(operator==="subtract") answer = a-b;
     if(operator==="multiply") answer = a*b;
     if(operator==="divide" && b!=0) answer = a/b;
     if(operator==="divide" && b==0) answer = "Don't Divide by 0!";
-    display.textContent= `${answer}`;
+    display.textContent= `${answer.toPrecision(6)}`;
     num1=''; num2='';
 }
 
@@ -61,5 +87,6 @@ function reset(){
     answer=0;
     chooseEqual=false;
     chooseSign=false;
+    decimalUse=false;
     operator='';
 }
