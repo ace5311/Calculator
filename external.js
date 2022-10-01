@@ -84,6 +84,7 @@ function operate(operator, num1, num2){
     if(answer.toString().length < 10) display.textContent= `${answer}`;
     else display.textContent=`${answer.toPrecision(10)}`;
     num1=''; num2='';
+    
 }
 
 function reset(){

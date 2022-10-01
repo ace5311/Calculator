@@ -62,7 +62,7 @@ body {
     outline: navajowhite;
 }
 
-#add, #subtract, #multiply, #divide, #equals {
+.operator, #equals {
     background-color: goldenrod;
 }
 
@@ -74,4 +74,10 @@ body {
 .btn:hover {
     transform: scale(1.1);
     border-color: teal;
+}
+
+.chosen {
+    transform: scale(1.2);
+    background: greenyellow;
+    box-shadow: 0 0 10px greenyellow;
 }
