@@ -81,3 +81,7 @@ body {
     background: greenyellow;
     box-shadow: 0 0 10px greenyellow;
 }
+
+#equals {
+    margin-bottom: 10px;
+}
