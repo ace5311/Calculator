@@ -40,6 +40,8 @@ buttons.forEach(button => {button.addEventListener('click',()=>{
         if(decimalUse && userChoice===".") decimalUse=true;
         else{
             if(userChoice==="backspace") {
+                let deleted = num1.slice(-2,-1);
+                if(deleted==='.') decimalUse=false;
                 let editedNum1 = num1.slice(0,-1);
                 num1 = editedNum1;
                 display.textContent= `${num1}`;
@@ -55,6 +57,8 @@ buttons.forEach(button => {button.addEventListener('click',()=>{
         if(decimalUse && userChoice===".") decimalUse=true;
         else {
             if(userChoice==="backspace") {
+                let deleted = num1.slice(-2,-1);
+                if(deleted==='.') decimalUse=false;
                 let editedNum1 = num1.slice(0,-1);
                 num1 = editedNum1;
                 display.textContent= `${num1}`;
@@ -77,7 +81,8 @@ function operate(operator, num1, num2){
     if(operator==="multiply") answer = a*b;
     if(operator==="divide" && b!=0) answer = a/b;
     if(operator==="divide" && b==0) answer = "Don't Divide by 0!";
-    display.textContent= `${answer.toPrecision(6)}`;
+    if(answer.toString().length < 10) display.textContent= `${answer}`;
+    else display.textContent=`${answer.toPrecision(10)}`;
     num1=''; num2='';
 }
 
