@@ -4,13 +4,14 @@ let decimalUse = false;
 let num1 = '';
 let num2 = '';
 let operator = '';
-let answer = 0;
+let answer = '';
 
 const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('.btn');
 
 buttons.forEach(button => {button.addEventListener('click',()=>{
     let userChoice = button.id;
+    let choiceClass = button.className;
     if (userChoice==='clear'){
         display.textContent='';
         reset();
@@ -26,7 +27,7 @@ buttons.forEach(button => {button.addEventListener('click',()=>{
             chooseSign=false;
         }
     }
-    else if((userChoice === 'add' ||userChoice === 'subtract' || userChoice === 'multiply' || userChoice === 'divide')){
+    else if((userChoice === 'add' ||userChoice === 'subtract' || userChoice === 'multiply' || userChoice === 'divide') && num1!=''){
         chooseSign=true;
         if(num2!='') {
             operate(operator,num1,num2);
@@ -36,7 +37,8 @@ buttons.forEach(button => {button.addEventListener('click',()=>{
         operator = userChoice;
         decimalUse = false;
     }
-    else if(!chooseEqual && !chooseSign){
+    else if(!chooseEqual && !chooseSign && choiceClass!='btn operator'){
+        console.log(choiceClass);
         if(decimalUse && userChoice===".") decimalUse=true;
         else{
             if(userChoice==="backspace") {
@@ -90,7 +92,7 @@ function operate(operator, num1, num2){
 function reset(){
     num1='';
     num2='';
-    answer=0;
+    answer='';
     chooseEqual=false;
     chooseSign=false;
     decimalUse=false;
